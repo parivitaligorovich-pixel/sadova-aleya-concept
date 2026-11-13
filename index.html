@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Садова Алея — перший екран (редизайн)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Сітка: усі розміри шрифтів і відступи кратні 4 px */
+:root{
+  --green:#438F29;
+  --lime:#95C11F;
+  --lime-2:#B5DB3C;
+  --deep:#0F1F0B;
+  --white:#fff;
+  --glass:rgba(255,255,255,.10);
+  --glass-b:rgba(255,255,255,.22);
+  --text-dim:rgba(255,255,255,.80);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:Manrope,system-ui,sans-serif;font-size:16px;line-height:24px;background:var(--deep);color:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+
+/* background slideshow (Ken Burns) */
+.bg{position:absolute;inset:0;z-index:-2}
+.bg .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.12);transition:opacity 1.6s ease}
+.bg .slide.on{opacity:1;animation:kb 9s linear forwards}
+@keyframes kb{from{transform:scale(1.12) translate3d(0,0,0)}to{transform:scale(1.0) translate3d(-1.5%,-1%,0)}}
+.shade{position:absolute;inset:0;z-index:-1;
+  background:
+   linear-gradient(90deg,rgba(9,20,6,.92) 0%,rgba(9,20,6,.82) 40%,rgba(9,20,6,.6) 56%,rgba(9,20,6,.2) 74%,rgba(9,20,6,.08) 100%),
+   linear-gradient(0deg,rgba(9,20,6,.85) 0%,rgba(9,20,6,0) 36%);}
+.grain{position:absolute;inset:0;z-index:-1;opacity:.07;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:24px auto 0;width:min(1240px,calc(100% - 32px));
+  padding:4px 4px 4px 20px;border-radius:999px;background:rgba(255,255,255,.94);color:#1b2b14;box-shadow:0 8px 40px rgba(0,0,0,.18)}
+header .logo img{height:32px;display:block}
+nav{display:flex;gap:28px;font-weight:500;font-size:14px;line-height:20px}
+nav a{opacity:.8;transition:opacity .2s}
+nav a:hover{opacity:1;color:var(--green)}
+.h-right{display:flex;align-items:center;gap:12px}
+.phone{font-weight:700;font-size:14px;line-height:16px;white-space:nowrap}
+.phone small{display:block;font-weight:500;font-size:12px;line-height:16px;opacity:.6;margin-top:2px}
+.btn-ghost{padding:8px 16px;border-radius:999px;border:2px solid #5C8A0E;color:#5C8A0E;font-weight:700;font-size:14px;line-height:20px;transition:.2s}
+.btn-ghost:hover{background:var(--lime);border-color:var(--lime);color:#13230c}
+
+/* content */
+.wrap{flex:1;display:flex;align-items:center;width:min(1240px,calc(100% - 32px));margin:0 auto;padding:48px 0 80px}
+.content{max-width:800px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:0;background:none;border:0;color:var(--lime-2);font-weight:700;font-size:12px;line-height:16px;letter-spacing:.08em;text-transform:uppercase}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(149,193,31,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(149,193,31,0)}100%{box-shadow:0 0 0 0 rgba(149,193,31,0)}}
+
+h1{font-family:Unbounded,Manrope,sans-serif;font-weight:600;font-size:48px;line-height:56px;letter-spacing:-.02em;margin:24px 0 24px}
+h1 .line{display:block;overflow:hidden}
+h1 .line > span{display:inline-block;transform:translateY(105%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .line:nth-child(2) > span{animation-delay:.12s}
+h1 .price{color:var(--lime-2);white-space:nowrap;text-shadow:0 4px 24px rgba(0,0,0,.45)}
+@keyframes up{to{transform:none}}
+.lead{font-size:16px;line-height:24px;font-weight:400;color:var(--text-dim);max-width:640px;text-wrap:balance}
+.lead b{color:#fff;font-weight:400}
+
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 72px}
+.chip{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:16px;background:var(--glass);border:1px solid var(--glass-b);backdrop-filter:blur(12px);font-size:16px;line-height:24px;font-weight:600}
+.chip svg{flex:none}
+.chip img{height:16px;filter:brightness(0) invert(1)}
+
+.ctas{display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;padding:20px 32px;border-radius:16px;background:var(--lime);color:#13230c;font-weight:800;font-size:16px;line-height:24px;box-shadow:0 16px 40px rgba(149,193,31,.35);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(149,193,31,.5)}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:shine 3.6s 2s infinite}
+@keyframes shine{0%{left:-60%}35%,100%{left:130%}}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+.play{display:inline-flex;align-items:center;gap:12px;padding:8px 20px 8px 8px;border-radius:16px;font-weight:700;font-size:16px;line-height:24px;transition:background .2s}
+.play:hover{background:var(--glass)}
+.play i{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.16);border:1px solid var(--glass-b);position:relative}
+.play i::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(255,255,255,.35);animation:ring 2.4s infinite}
+@keyframes ring{from{transform:scale(.85);opacity:1}to{transform:scale(1.35);opacity:0}}
+.note{margin-top:24px;font-size:12px;line-height:16px;color:rgba(255,255,255,.6)}
+
+/* slide dots */
+.dots{position:absolute;right:max(16px,calc((100% - 1240px)/2));bottom:48px;display:flex;gap:8px}
+.dots button{width:32px;height:4px;border-radius:4px;background:rgba(255,255,255,.3);overflow:hidden;position:relative}
+.dots button.on::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:left;animation:fill 6s linear forwards}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* concept label */
+.concept{position:fixed;left:16px;bottom:16px;z-index:20;padding:4px 12px;border-radius:999px;background:rgba(0,0,0,.55);color:rgba(255,255,255,.75);font-size:12px;line-height:16px;backdrop-filter:blur(8px)}
+@media (max-width:640px){.concept{bottom:88px}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* chat bubble (small, non-intrusive) */
+.chat{position:fixed;right:24px;bottom:24px;z-index:20;display:flex;align-items:center;gap:12px}
+.chat .fab{width:56px;height:56px;border-radius:50%;background:var(--lime);display:grid;place-items:center;box-shadow:0 8px 32px rgba(0,0,0,.3);transition:transform .2s}
+.chat .fab:hover{transform:scale(1.06)}
+.chat .tip{background:#fff;color:#1b2b14;padding:12px 16px;border-radius:16px 16px 4px 16px;font-size:16px;line-height:24px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,.25);opacity:0;transform:translateY(8px);pointer-events:none;transition:.4s}
+.chat .tip.show{opacity:1;transform:none;pointer-events:auto}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgba(5,10,3,.7);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s}
+.modal.open{opacity:1;pointer-events:auto}
+.box{width:min(464px,100%);background:#fff;color:#1b2b14;border-radius:24px;padding:32px;transform:translateY(20px) scale(.98);transition:transform .35s cubic-bezier(.2,.8,.2,1);position:relative}
+.modal.open .box{transform:none}
+.box h4{font-family:Unbounded,sans-serif;font-size:24px;line-height:32px;font-weight:600;padding-right:40px}
+.box p{margin:8px 0 24px;color:#5b6656;font-size:16px;line-height:24px}
+.seg{display:flex;gap:8px;margin-bottom:12px}
+.seg label{flex:1}
+.seg input{display:none}
+.seg span{display:block;text-align:center;padding:12px 8px;border-radius:12px;border:2px solid #dfe5da;font-weight:700;font-size:16px;line-height:24px;cursor:pointer;transition:.2s}
+.seg input:checked + span{border-color:var(--green);background:#eef6e4;color:var(--green)}
+.box input[type=text],.box input[type=tel]{width:100%;padding:16px;border-radius:12px;border:2px solid #dfe5da;font:inherit;font-size:16px;line-height:24px;margin-bottom:12px;outline:none;transition:border .2s}
+.box input:focus{border-color:var(--green)}
+.box .btn{width:100%;justify-content:center;margin-top:4px}
+.box .small{font-size:12px;line-height:16px;color:#8a9486;text-align:center;margin-top:12px}
+.x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:#f1f4ee;font-size:20px;line-height:20px}
+.ok{display:none;text-align:center;padding:24px 0}
+.ok .ic{width:64px;height:64px;border-radius:50%;background:#eef6e4;display:grid;place-items:center;margin:0 auto 16px}
+.ok h4{padding-right:0}
+.video .box{width:min(976px,100%);padding:0;background:#000;overflow:hidden}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.video .x{background:rgba(255,255,255,.9);z-index:2}
+
+/* responsive */
+@media (max-width:1080px){
+  nav{display:none}
+  .dots{display:none}
+  h1{font-size:40px;line-height:48px}
+}
+@media (max-width:640px){
+  header{padding:4px 4px 4px 16px}
+  header .logo img{height:28px}
+  .wrap{padding:40px 0 48px}
+  h1{margin:16px 0 20px}
+  .chips{gap:8px;margin:24px 0 48px}
+  .ctas{gap:16px}
+  .phone{display:none}
+  .btn-ghost{padding:8px 12px}
+  h1{font-size:32px;line-height:40px}
+  .btn{width:100%;justify-content:center;padding:20px 24px}
+  .chip{padding:8px 12px}
+  .chat{right:16px;bottom:16px}
+  .shade{background:linear-gradient(0deg,rgba(9,20,6,.95) 0%,rgba(9,20,6,.7) 56%,rgba(9,20,6,.44) 100%)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}h1 .line>span{transform:none}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="bg" id="bg"></div>
+  <div class="shade"></div>
+  <div class="grain"></div>
+
+  <header>
+    <a class="logo" href="#"><img src="logo_sadova-aleya.svg" alt="Садова Алея"></a>
+    <nav>
+      <a href="#">Квартири</a>
+      <a href="#">Ціни та умови</a>
+      <a href="#">Хід будівництва</a>
+      <a href="#">Розташування</a>
+      <a href="#">Контакти</a>
+    </nav>
+    <div class="h-right">
+      <a class="phone" href="tel:+380674887917">(067) 488-79-17<small>Пн–Пт 10–19, Сб 11–16</small></a>
+      <button class="btn-ghost" data-open="lead" data-title="Залиште номер, і ми передзвонимо">Передзвоніть мені</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="content">
+      <div class="badge rv"><span class="dot"></span>Старт продажу · Будинок №9</div>
+
+      <h1>
+        <span class="line"><span>Квартири від&nbsp;<span class="price"><span id="count">39 490</span> $</span></span></span>
+        <span class="line"><span>за 9&nbsp;км від&nbsp;Львова</span></span>
+      </h1>
+
+      <p class="lead rv">Новий будинок у кварталі «Садова Алея» із закритою зеленою територією. <b>3 будинки вже здані</b>, тож можна приїхати й подивитися наживо.</p>
+
+      <div class="chips rv">
+        <div class="chip">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B5DB3C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Розтермінування до 20 років
+        </div>
+        <div class="chip">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B5DB3C" stroke-width="2.2" stroke-linecap="round"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+          Перший внесок від 20%
+        </div>
+        <div class="chip"><img src="oselya.svg" alt="єОселя"> від 3% річних</div>
+      </div>
+
+      <div class="ctas rv">
+        <button class="btn" data-open="lead" data-title="Отримайте планування і ціни 9-го будинку">
+          Отримати планування і ціни
+          <svg class="arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="play" data-open="video">
+          <i><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l13-7.5z"/></svg></i>
+          Відеотур кварталом
+        </button>
+      </div>
+      <p class="note rv">Надішлемо планування у Viber або Telegram, без зайвих дзвінків.</p>
+    </div>
+
+  </div>
+
+  <div class="dots" id="dots"></div>
+
+</section>
+
+<div class="concept">Концепт редизайну першого екрана · не офіційний сайт</div>
+
+<!-- small chat: appears as a hint, does not cover content -->
+<div class="chat">
+  <div class="tip" id="tip">Є питання? Напишіть нам 👋</div>
+  <button class="fab" aria-label="Чат" data-open="lead" data-title="Напишіть нам, і ми відповімо">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#13230c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+  </button>
+</div>
+
+<!-- lead modal -->
+<div class="modal" id="lead">
+  <div class="box">
+    <button class="x" data-close>×</button>
+    <form id="form">
+      <h4 id="ltitle">Отримайте планування і ціни 9-го будинку</h4>
+      <p>Залиште номер, і менеджер надішле актуальні планування та розрахунок розтермінування.</p>
+      <div class="seg">
+        <label><input type="radio" name="t" value="1" checked><span>1-кімн.</span></label>
+        <label><input type="radio" name="t" value="2"><span>2-кімн.</span></label>
+        <label><input type="radio" name="t" value="c"><span>Комерція</span></label>
+      </div>
+      <input type="text" placeholder="Ваше ім'я" required>
+      <input type="tel" id="tel" placeholder="+38 (0__) ___-__-__" required>
+      <button class="btn" type="submit">Надіслати планування</button>
+      <div class="small">Без спаму. Лише планування й ціни.</div>
+    </form>
+    <div class="ok" id="ok">
+      <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#438F29" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h4>Дякуємо!</h4>
+      <p>Менеджер незабаром надішле вам планування.</p>
+    </div>
+  </div>
+</div>
+
+<!-- video modal -->
+<div class="modal video" id="video">
+  <div class="box">
+    <button class="x" data-close>×</button>
+    <iframe id="yt" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+/* background slideshow */
+const imgs=[
+  '202304121512-6-6436a027413cd.webp',
+  '202304121512-6-6436a0289ac4b.webp',
+  '202304121512-6-6436a027b3e83.webp',
+  '202304121512-6-6436a02ace8bb.webp'
+];
+const bg=document.getElementById('bg'),dots=document.getElementById('dots');
+const slides=imgs.map((src,i)=>{
+  const d=document.createElement('div');d.className='slide';d.style.backgroundImage=`url(${src})`;bg.appendChild(d);
+  const b=document.createElement('button');b.setAttribute('aria-label','Слайд '+(i+1));b.onclick=()=>go(i,true);dots.appendChild(b);
+  return d;
+});
+let cur=-1,timer;
+function go(i,manual){
+  if(cur>=0){slides[cur].classList.remove('on');dots.children[cur].classList.remove('on')}
+  cur=i;
+  const s=slides[cur];s.style.animation='none';s.offsetHeight;s.style.animation='';
+  s.classList.add('on');
+  const d=dots.children[cur];d.classList.remove('on');d.offsetHeight;d.classList.add('on');
+  clearTimeout(timer);timer=setTimeout(()=>go((cur+1)%slides.length),6000);
+}
+go(0);
+
+/* reveal + count-up + bar */
+requestAnimationFrame(()=>{
+  document.querySelectorAll('.rv').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),350+i*120));
+});
+const cnt=document.getElementById('count'),target=39490,t0=performance.now()+450,dur=1400;
+function tick(now){
+  const p=Math.min(1,Math.max(0,(now-t0)/dur)),e=1-Math.pow(1-p,4);
+  cnt.textContent=Math.round(target*e).toLocaleString('uk-UA').replace(/ /g,' ');
+  if(p<1)requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+/* subtle parallax on mouse */
+window.addEventListener('mousemove',e=>{
+  const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
+  bg.style.transform=`translate3d(${x*-14}px,${y*-10}px,0)`;
+});
+
+/* chat hint after 20s instead of popup */
+setTimeout(()=>{const t=document.getElementById('tip');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),7000)},20000);
+
+/* modals */
+const lead=document.getElementById('lead'),video=document.getElementById('video'),yt=document.getElementById('yt');
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
+  if(b.dataset.open==='video'){yt.src='https://www.youtube.com/embed/D0ESOPRC77U?autoplay=1&rel=0';video.classList.add('open');return}
+  document.getElementById('ltitle').textContent=b.dataset.title||'Отримайте планування і ціни';
+  if(b.dataset.type){lead.querySelector(`input[value="${b.dataset.type}"]`).checked=true}
+  document.getElementById('form').style.display='';document.getElementById('ok').style.display='none';
+  lead.classList.add('open');setTimeout(()=>lead.querySelector('input[type=text]').focus(),300);
+}));
+function closeAll(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));yt.src=''}
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeAll);
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeAll()}));
+addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+
+/* phone mask */
+const tel=document.getElementById('tel');
+tel.addEventListener('input',()=>{
+  let d=tel.value.replace(/\D/g,'');if(d.startsWith('38'))d=d.slice(2);d=d.slice(0,10);
+  let r='+38 ';if(d.length)r+='('+d.slice(0,3);if(d.length>=3)r+=') '+d.slice(3,6);if(d.length>=6)r+='-'+d.slice(6,8);if(d.length>=8)r+='-'+d.slice(8,10);
+  tel.value=r;
+});
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();e.target.style.display='none';document.getElementById('ok').style.display='block';
+});
+</script>
+</body>
+</html>

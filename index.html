@@ -314,7 +314,7 @@ setTimeout(()=>{const t=document.getElementById('tip');t.classList.add('show');s
 /* modals */
 const lead=document.getElementById('lead'),video=document.getElementById('video'),yt=document.getElementById('yt');
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
-  if(b.dataset.open==='video'){yt.src='https://www.youtube.com/embed/D0ESOPRC77U?autoplay=1&rel=0';video.classList.add('open');return}
+  if(b.dataset.open==='video'){yt.src='https://www.youtube.com/embed/S-RBzzEi7Pk?autoplay=1&rel=0';video.classList.add('open');return}
   document.getElementById('ltitle').textContent=b.dataset.title||'Отримайте планування і ціни';
   if(b.dataset.type){lead.querySelector(`input[value="${b.dataset.type}"]`).checked=true}
   document.getElementById('form').style.display='';document.getElementById('ok').style.display='none';

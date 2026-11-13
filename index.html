@@ -208,7 +208,7 @@ h1 .price{color:var(--lime-2);white-space:nowrap;text-shadow:0 4px 24px rgba(0,0
           Отримати планування і ціни
           <svg class="arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-        <button class="play" data-open="video">
+        <button class="play" type="button">
           <i><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l13-7.5z"/></svg></i>
           Відеотур кварталом
         </button>
@@ -257,13 +257,6 @@ h1 .price{color:var(--lime-2);white-space:nowrap;text-shadow:0 4px 24px rgba(0,0
   </div>
 </div>
 
-<!-- video modal -->
-<div class="modal video" id="video">
-  <div class="box">
-    <button class="x" data-close>×</button>
-    <iframe id="yt" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
-  </div>
-</div>
 
 <script>
 /* background slideshow */
@@ -312,15 +305,14 @@ window.addEventListener('mousemove',e=>{
 setTimeout(()=>{const t=document.getElementById('tip');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),7000)},20000);
 
 /* modals */
-const lead=document.getElementById('lead'),video=document.getElementById('video'),yt=document.getElementById('yt');
+const lead=document.getElementById('lead');
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
-  if(b.dataset.open==='video'){yt.src='https://www.youtube.com/embed/S-RBzzEi7Pk?autoplay=1&rel=0';video.classList.add('open');return}
   document.getElementById('ltitle').textContent=b.dataset.title||'Отримайте планування і ціни';
   if(b.dataset.type){lead.querySelector(`input[value="${b.dataset.type}"]`).checked=true}
   document.getElementById('form').style.display='';document.getElementById('ok').style.display='none';
   lead.classList.add('open');setTimeout(()=>lead.querySelector('input[type=text]').focus(),300);
 }));
-function closeAll(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));yt.src=''}
+function closeAll(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'))}
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeAll);
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeAll()}));
 addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
